@@ -1,0 +1,26 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Komplex projekt feladat - Frontend",
+  "main": "index.js",
+  "scripts": {
+    "build:esbuild": "esbuild src/js/App.jsx --bundle --minify --target=chrome58,firefox57,safari11,edge18 --jsx-import-source=preact --jsx=automatic --outfile=dist/bundle.js",
+    "build:css": "npx tailwindcss -i ./src/css/style.css -o ./dist/bundle.css --minify",
+    "watch:esbuild": "esbuild src/js/App.jsx --bundle --minify --target=chrome58,firefox57,safari11,edge18 --jsx-import-source=preact --jsx=automatic --outfile=dist/bundle.js --watch",
+    "watch:css": "npx tailwindcss -i ./src/css/style.css -o ./dist/bundle.css --watch",
+    "build": "concurrently --kill-others-on-fail npm:build:esbuild npm:build:css",
+    "watch": "concurrently --kill-others-on-fail npm:watch:esbuild npm:watch:css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "daisyui": "^3.8.2",
+    "esbuild": "0.19.4",
+    "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "preact": "^10.18.0"
+  }
+}
