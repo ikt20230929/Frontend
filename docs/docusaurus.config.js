@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Frontend',
   tagline: 'Frontend dokumentáció',
-  favicon: 'favicon.ico',
+  favicon: '../favicon.ico',
 
   url: 'https://ikt20230929.github.io',
   baseUrl: '/Frontend/docs/',
@@ -47,7 +47,7 @@ const config = {
         title: 'Frontend',
         logo: {
           alt: 'Frontend Logo',
-          src: 'favicon-32x32.png',
+          src: '../favicon-32x32.png',
         },
         items: [
           {
