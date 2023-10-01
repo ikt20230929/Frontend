@@ -4,10 +4,10 @@
   "description": "Komplex projekt feladat - Frontend",
   "main": "index.js",
   "scripts": {
-    "build:esbuild": "esbuild src/js/App.jsx --bundle --minify --target=chrome58,firefox57,safari11,edge18 --jsx-import-source=preact --jsx=automatic --outfile=dist/bundle.js",
-    "build:css": "npx tailwindcss -i ./src/css/style.css -o ./dist/bundle.css --minify",
-    "watch:esbuild": "esbuild src/js/App.jsx --bundle --minify --target=chrome58,firefox57,safari11,edge18 --jsx-import-source=preact --jsx=automatic --outfile=dist/bundle.js --watch",
-    "watch:css": "npx tailwindcss -i ./src/css/style.css -o ./dist/bundle.css --watch",
+    "build:esbuild": "esbuild src/js/App.jsx --bundle --minify --target=chrome58,firefox57,safari11,edge18 --jsx-import-source=preact --jsx=automatic --outfile=public/dist/bundle.js",
+    "build:css": "npx tailwindcss -i ./src/css/style.css -o ./public/dist/bundle.css --minify",
+    "watch:esbuild": "esbuild src/js/App.jsx --bundle --minify --target=chrome58,firefox57,safari11,edge18 --jsx-import-source=preact --jsx=automatic --outfile=public/dist/bundle.js --watch",
+    "watch:css": "npx tailwindcss -i ./src/css/style.css -o ./public/dist/bundle.css --watch",
     "build": "concurrently --kill-others-on-fail npm:build:esbuild npm:build:css",
     "watch": "concurrently --kill-others-on-fail npm:watch:esbuild npm:watch:css"
   },
