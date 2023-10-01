@@ -9,7 +9,7 @@ const config = {
   favicon: 'favicon.ico',
 
   url: 'https://ikt20230929.github.io',
-  baseUrl: '/Frontend',
+  baseUrl: '/Frontend/docs/',
 
   organizationName: 'ikt20230929',
   projectName: 'Frontend',
