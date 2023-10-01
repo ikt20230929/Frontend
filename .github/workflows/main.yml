@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3.8.1
-      - run: npm run build
-      - shell: bash
-        run: |
-           mv index.html dist/
+      - run: |
+          npm install
+          npm run build
+          mv index.html dist/
       - uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/dev'
         with:
