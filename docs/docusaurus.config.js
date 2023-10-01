@@ -14,13 +14,13 @@ const config = {
   organizationName: 'ikt20230929',
   projectName: 'Frontend',
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
 
   i18n: {
     defaultLocale: 'hu',
-    locales: ['hu', 'en'],
+    locales: ['hu'],
   },
 
   presets: [
@@ -29,6 +29,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
         },
 
