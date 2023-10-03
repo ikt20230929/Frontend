@@ -1,3 +1,15 @@
+export function FormItemSet(props) {
+    if (props.class === undefined) props.class = "";
+
+    return (
+        <fieldset class={`border dark:border-[#383f47] light:border-[#d2d4d7] rounded-lg ${props.class}`}>
+            {props.title ? <legend class="text-center">{props.title}</legend> : null}
+            {...props.items}
+        </fieldset>
+    );
+}
+
+
 export function FormItem(props) {
     const isRequired = props.required ? { required: true } : {};
 
@@ -30,9 +42,10 @@ export function FormItem(props) {
             ]
         }
 
-        case "submit": {
+        case "submit":
+        case "button": {
             return [
-                <button type="submit" class={`btn ${props.class}`}>{props.text}</button>
+                <button type={props.type} class={`btn ${props.class}`}>{props.text}</button>
             ]
         }
     }
