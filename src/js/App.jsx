@@ -2,21 +2,38 @@ import { Form, FormItem, FormItemSet } from "./Form";
 import { Header, HeaderItem } from "./components/Header";
 import { render, Component } from "preact";
 
+function generateRandomPassword(length) {
+  const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+";
+  const passwordArray = new Uint8Array(length);
+  const charsetLength = charset.length;
+
+  window.crypto.getRandomValues(passwordArray);
+
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += charset[passwordArray[i] % charsetLength];
+  }
+
+  return password;
+}
+
 class App extends Component {
-  render() {
+  render() {    
     return [
       <Header title="Regisztráció" items={[
         <HeaderItem href="docs" text="Dokumentáció" />
       ]} />,
       <Form class="container mx-auto" items={[
         <div class="space-y-2">
-          <FormItem name="name" type="text" text="Név" required="true" />
+          <FormItem name="name" type="text" text="Név" pattern="^[A-Z][a-zA-Z]*$" required="true" />
           <FormItem name="field" type="text" text="Foglalkozás" required="true" />
-          <FormItem name="email" type="email" text="Email" required="true" />
+          <FormItem name="email" type="email" text="Email (.com/.hu/.net/.edu)" pattern=".*(\.com|\.hu|\.net|\.edu)" required="true" />
 
           <FormItemSet class="join" items={[
-              <FormItem name="password" class="border-none join-item" type="password" text="Jelszó" required="true" />,
-              <FormItem type="button" class="btn-ghost no-animation join-item" text="Generálás" />
+              <FormItem name="password" id="password" class="border-none join-item" type="password" text="Jelszó" required="true" />,
+              <FormItem type="button" onclick={() => {
+                document.getElementById("password").value = generateRandomPassword(16);
+              }} class="btn-ghost no-animation join-item" text="Generálás" />
           ]} />
         </div>,
 
