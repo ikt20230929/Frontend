@@ -25,8 +25,8 @@ class App extends Component {
       ]} />,
       <Form class="container mx-auto" items={[
         <div class="space-y-2">
-          <FormItem name="name" type="text" text="Név" pattern="^[A-Z][a-zA-Z]*$" required="true" />
-          <FormItem name="field" type="text" text="Foglalkozás" required="true" />
+          <FormItem name="name" type="text" text="Név" pattern="^[A-Z][^0-9]*$" required="true" />
+          <FormItem name="profession" type="text" text="Foglalkozás" required="true" />
           <FormItem name="email" type="email" text="Email (.com/.hu/.net/.edu)" pattern=".*(\.com|\.hu|\.net|\.edu)" required="true" />
 
           <FormItemSet class="join" items={[
@@ -55,16 +55,16 @@ class App extends Component {
 
         <FormItemSet title="Ágazat" items={[
           <table class="grid grid-cols-2 gap-x-12">
-            <FormItem name="profession" type="radio" text="Bányászat" />
-            <FormItem name="profession" type="radio" text="Egészségügy" />
-            <FormItem name="profession" type="radio" text="Építőipar" />
-            <FormItem name="profession" type="radio" text="Élelmiszeripar" />
-            <FormItem name="profession" type="radio" text="Épületgépészet" />
-            <FormItem name="profession" type="radio" text="Honvédelem" />
-            <FormItem name="profession" type="radio" text="Gépészet" />
-            <FormItem name="profession" type="radio" text="Kereskedelem" />
-            <FormItem name="profession" type="radio" text="Oktatás" />
-            <FormItem name="profession" type="radio" text="Szociális" />
+            <FormItem name="field" type="radio" text="Bányászat" />
+            <FormItem name="field" type="radio" text="Egészségügy" />
+            <FormItem name="field" type="radio" text="Építőipar" />
+            <FormItem name="field" type="radio" text="Élelmiszeripar" />
+            <FormItem name="field" type="radio" text="Épületgépészet" />
+            <FormItem name="field" type="radio" text="Honvédelem" />
+            <FormItem name="field" type="radio" text="Gépészet" />
+            <FormItem name="field" type="radio" text="Kereskedelem" />
+            <FormItem name="field" type="radio" text="Oktatás" />
+            <FormItem name="field" type="radio" text="Szociális" />
           </table>
         ]} />,
 
