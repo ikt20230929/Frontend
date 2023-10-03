@@ -20,7 +20,7 @@ export function FormItem(props) {
         case "password":
         case "email": {
             return [
-                <input type={props.type} id={props.id} name={props.name} placeholder={props.text} pattern={props.pattern} class={`input input-bordered w-full max-w-xs ${props.class}`} {...isRequired} />
+                <input type={props.type} id={props.id} name={props.name} placeholder={props.text} pattern={props.pattern} class={`input input-bordered w-full max-w-xs border-none focus:outline-none ${props.class}`} {...isRequired} />
             ]
         }
 

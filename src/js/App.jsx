@@ -1,4 +1,5 @@
-import { Form, FormItem, FormItemSet } from "./Form";
+import { KeyRound, Mail, User, Briefcase } from "lucide-preact";
+import { Form, FormItem, FormItemSet } from "./components/Form";
 import { Header, HeaderItem } from "./components/Header";
 import { render, Component } from "preact";
 
@@ -25,15 +26,28 @@ class App extends Component {
       ]} />,
       <Form class="container mx-auto" items={[
         <div class="space-y-2">
-          <FormItem name="name" type="text" text="Név" pattern="^[A-Z][^0-9]*$" required="true" />
-          <FormItem name="profession" type="text" text="Foglalkozás" required="true" />
-          <FormItem name="email" type="email" text="Email (.com/.hu/.net/.edu)" pattern=".*(\.com|\.hu|\.net|\.edu)" required="true" />
+          <FormItemSet class="join flex justify-center items-center" items={[
+            <User class="ml-3" />,
+            <FormItem name="name" type="text" text="Név" pattern="^[A-Z][^0-9]*$" required="true" />
+          ]} />
 
-          <FormItemSet class="join" items={[
-              <FormItem name="password" id="password" class="border-none join-item" type="password" text="Jelszó" required="true" />,
+          <FormItemSet class="join flex justify-center items-center" items={[
+            <Briefcase class="ml-3" />,
+            <FormItem name="profession" type="text" text="Foglalkozás" required="true" />
+          ]} />
+
+
+          <FormItemSet class="join flex justify-center items-center" items={[
+            <Mail class="ml-3" />,
+            <FormItem name="email" type="email" text="Email (.com/.hu/.net/.edu)" pattern=".*(\.com|\.hu|\.net|\.edu)" required="true" />
+          ]} />
+
+          <FormItemSet class="join flex justify-center items-center" items={[
+              <KeyRound class="ml-3 w-12" />,
+              <FormItem name="password" id="password" type="password" text="Jelszó" required="true" />,
               <FormItem type="button" onclick={() => {
                 document.getElementById("password").value = generateRandomPassword(16);
-              }} class="btn-ghost no-animation join-item" text="Generálás" />
+              }} class="btn-ghost no-animation" text="Generálás" />
           ]} />
         </div>,
 
