@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
           cd docs && npm install && cd ..
           npm run build
       - uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
