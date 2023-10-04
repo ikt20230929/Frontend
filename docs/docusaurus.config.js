@@ -1,6 +1,7 @@
 // @ts-check
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+require('dotenv').config();
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -9,7 +10,7 @@ const config = {
   favicon: '../favicon.ico',
 
   url: 'https://ikt20230929.github.io',
-  baseUrl: '/Frontend/docs/',
+  baseUrl: process.env.DOCS_BASE_URL || '/public/docs/',
 
   organizationName: 'ikt20230929',
   projectName: 'Frontend',
@@ -44,39 +45,22 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Frontend',
+        title: 'Regisztráció',
         logo: {
           alt: 'Frontend Logo',
           src: '../favicon-32x32.png',
         },
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
-          }
-        ],
       },
       footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Test',
-                to: '/docs/',
-              },
-            ],
-          },
-        ],
-        copyright: `The source code is licensed MIT. The website content is licensed CC BY-NC-SA 4.0.`,
+        copyright: 'A forráskód MIT licenc alatt áll. A weboldal tartalma CC BY-NC-SA 4.0 licenc alá tartozik.',
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      colorMode: {
+        respectPrefersColorScheme: true
+      }
     }),
 };
 
