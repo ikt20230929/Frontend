@@ -69,16 +69,16 @@ class App extends Component {
 
         <FormItemSet title="Ágazat" items={[
           <table class="grid grid-cols-2 gap-x-12">
-            <FormItem name="field" type="radio" text="Bányászat" />
-            <FormItem name="field" type="radio" text="Egészségügy" />
-            <FormItem name="field" type="radio" text="Építőipar" />
-            <FormItem name="field" type="radio" text="Élelmiszeripar" />
-            <FormItem name="field" type="radio" text="Épületgépészet" />
-            <FormItem name="field" type="radio" text="Honvédelem" />
-            <FormItem name="field" type="radio" text="Gépészet" />
-            <FormItem name="field" type="radio" text="Kereskedelem" />
-            <FormItem name="field" type="radio" text="Oktatás" />
-            <FormItem name="field" type="radio" text="Szociális" />
+            <FormItem name="field" type="radio" text="Bányászat" required="true" />
+            <FormItem name="field" type="radio" text="Egészségügy" required="true" />
+            <FormItem name="field" type="radio" text="Építőipar" required="true" />
+            <FormItem name="field" type="radio" text="Élelmiszeripar" required="true" />
+            <FormItem name="field" type="radio" text="Épületgépészet" required="true" />
+            <FormItem name="field" type="radio" text="Honvédelem" required="true" />
+            <FormItem name="field" type="radio" text="Gépészet" required="true" />
+            <FormItem name="field" type="radio" text="Kereskedelem" required="true" />
+            <FormItem name="field" type="radio" text="Oktatás" required="true" />
+            <FormItem name="field" type="radio" text="Szociális" required="true" />
           </table>
         ]} />,
 
