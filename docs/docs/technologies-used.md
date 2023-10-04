@@ -1,7 +1,5 @@
 # Használt technológiák a Projektben
 
-Ebben a dokumentumban összefoglaljuk, hogy milyen technológiákat és könyvtárakat használtunk a "frontend" projektünkben, valamint bemutatjuk, hogy ezeket pontosan mire használtuk.
-
 ## Build és Bundle
 
 - **esbuild (v0.19.4)**: Az esbuild egy gyors és hatékony JavaScript és CSS fájlok bundlerezője. Ezt a technológiát használtuk a projekt JavaScript fájljainak összeállításához, minifikálásához és bundlerezéséhez. Az `App.jsx` fájl összeállítása során alkalmaztuk.
