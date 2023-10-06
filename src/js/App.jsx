@@ -2,21 +2,8 @@ import { KeyRound, Mail, User, Briefcase } from "lucide-preact";
 import { Form, FormItem, FormItemSet } from "./components/Form";
 import { Header, HeaderItem } from "./components/Header";
 import { render, Component } from "preact";
-
-function generateRandomPassword(length) {
-  const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+";
-  const passwordArray = new Uint8Array(length);
-  const charsetLength = charset.length;
-
-  window.crypto.getRandomValues(passwordArray);
-
-  let password = '';
-  for (let i = 0; i < length; i++) {
-    password += charset[passwordArray[i] % charsetLength];
-  }
-
-  return password;
-}
+import { generateRandomPassword } from "./passwordGenerator";
+import { formValidate } from "./validation";
 
 class App extends Component {
   render() {    
@@ -24,11 +11,14 @@ class App extends Component {
       <Header title="Regisztráció" items={[
         <HeaderItem href="docs" text="Dokumentáció" />
       ]} />,
-      <Form class="container mx-auto" items={[
+      <Form class="container mx-auto" onsubmit={(e) => {
+        e.preventDefault();
+        formValidate(new FormData(e.target));
+      }} items={[
         <div class="space-y-2">
           <FormItemSet class="join flex justify-center items-center" items={[
             <User class="ml-3" />,
-            <FormItem name="name" autocomplete="name" type="text" text="Név" pattern="^[A-Z][^0-9]*$" required="true" />
+            <FormItem name="name" autocomplete="name" type="text" text="Név" />
           ]} />
 
           <FormItemSet class="join flex justify-center items-center" items={[
@@ -39,7 +29,7 @@ class App extends Component {
 
           <FormItemSet class="join flex justify-center items-center" items={[
             <Mail class="ml-3" />,
-            <FormItem name="email" autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" pattern=".*(\.com|\.hu|\.net|\.edu)" required="true" />
+            <FormItem name="email" autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" required="true"/>
           ]} />
 
           <FormItemSet class="join flex justify-center items-center" items={[
@@ -53,10 +43,10 @@ class App extends Component {
 
         <FormItemSet title="Életkor" items={[
           <div class="join gap-2">
-            <FormItem name="agegroup" type="radio" text="18-20" required="true" />
-            <FormItem name="agegroup" type="radio" text="25-30" required="true" />
-            <FormItem name="agegroup" type="radio" text="21-24" required="true" />
-            <FormItem name="agegroup" type="radio" text="30+" required="true" />
+            <FormItem name="agegroup" type="radio" text="18-20" />
+            <FormItem name="agegroup" type="radio" text="25-30" />
+            <FormItem name="agegroup" type="radio" text="21-24" />
+            <FormItem name="agegroup" type="radio" text="30+" />
           </div>
         ]} />,
 

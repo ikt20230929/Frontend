@@ -53,7 +53,7 @@ export function FormItem(props) {
 
 export function Form(props) {
     return [
-        <form class={`form-control w-full max-w-xs ${props.class}`}>
+        <form class={`form-control w-full max-w-xs ${props.class}`} onSubmit={props.onsubmit}>
             {...props.items}
         </form>
     ]
