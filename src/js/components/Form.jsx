@@ -3,7 +3,7 @@ export function FormItemSet(props) {
 
     return (
         <fieldset class={`border dark:border-[#383f47] light:border-[#d2d4d7] rounded-lg ${props.class}`}>
-            {props.title ? <legend class="text-center">{props.title}</legend> : null}
+            {props.title ? <legend class="text-center m-auto">{props.title}</legend> : null}
             {...props.items}
         </fieldset>
     );
@@ -12,7 +12,7 @@ export function FormItemSet(props) {
 
 export function FormItem(props) {
     const isRequired = props.required ? { required: true } : {};
-
+    
     if(props.class === undefined) props.class = "";
 
     switch(props.type) {
@@ -20,14 +20,14 @@ export function FormItem(props) {
         case "password":
         case "email": {
             return [
-                <input type={props.type} id={props.id} name={props.name} placeholder={props.text} pattern={props.pattern} class={`input input-bordered w-full max-w-xs border-none focus:outline-none ${props.class}`} {...isRequired} />
+                <input type={props.type} id={props.id} name={props.name} placeholder={props.text} pattern={props.pattern} class={`input input-bordered w-full max-w-xs border-none focus:outline-none ${props.class}`} autoComplete={props.autocomplete} {...isRequired} />
             ]
         }
 
         case "checkbox": {
             return [
                 <label class="label justify-normal cursor-pointer">
-                    <input type="checkbox" name={props.name} checked={props.checked} class={`checkbox ${props.class}`} {...isRequired} />
+                    <input type="checkbox" name={props.name} checked={props.checked} class={`checkbox ${props.class}`} autoComplete={props.autocomplete} {...isRequired} />
                     <span class="label-text pl-2">{props.text}</span> 
                 </label>
             ]
@@ -36,7 +36,7 @@ export function FormItem(props) {
         case "radio": {
             return [
                     <label class="label justify-normal cursor-pointer">
-                        <input type="radio" name={props.name} value={props.text} class={`radio ${props.class}`} {...isRequired} />
+                        <input type="radio" name={props.name} value={props.text} class={`radio ${props.class}`} autoComplete={props.autocomplete} {...isRequired} />
                         <span class="label-text pl-2">{props.text}</span> 
                      </label>
             ]
@@ -45,7 +45,7 @@ export function FormItem(props) {
         case "submit":
         case "button": {
             return [
-                <button type={props.type} onClick={props.onclick} class={`btn ${props.class}`}>{props.text}</button>
+                <button type={props.type} onClick={props.onclick} class={`btn ${props.class}`} autoComplete={props.autocomplete}>{props.text}</button>
             ]
         }
     }
