@@ -10,8 +10,7 @@ export function FormItemSet({classes, title, items}) {
     );
 }
 
-export function FormItem({required, type, id, name, text, pattern, classes, autocomplete, formMethods, onclick}) {
-    const isRequired = required ? { required: true } : {};
+export function FormItem({type, id, name, text, classes, autocomplete, formMethods, onclick}) {
     const inputRef = useRef(null);
 
     switch(type) {
@@ -19,14 +18,14 @@ export function FormItem({required, type, id, name, text, pattern, classes, auto
         case "password":
         case "email": {
             return (
-                <input type={type} ref={inputRef} id={id} name={name} placeholder={text} pattern={pattern} className={`input input-bordered w-full max-w-xs border-none focus:outline-none${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} {...isRequired} {...formMethods} />
+                <input type={type} ref={inputRef} key={name} id={id} name={name} placeholder={text} className={`input input-bordered w-full max-w-xs border-none focus:outline-none${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete}  {...formMethods} />
             )
         }
 
         case "checkbox": {
             return (
                 <label className="label justify-normal cursor-pointer">
-                    <input type="checkbox" ref={inputRef} name={name} checked={checked} className={`checkbox${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} {...isRequired} />
+                    <input type="checkbox" ref={inputRef} key={name} name={name} className={`checkbox${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
                     <span className="label-text pl-2">{text}</span> 
                 </label>
             )
@@ -35,7 +34,7 @@ export function FormItem({required, type, id, name, text, pattern, classes, auto
         case "radio": {
             return (
                     <label className="label justify-normal cursor-pointer">
-                        <input type="radio" ref={inputRef} name={name} value={text} className={`radio${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} {...isRequired} />
+                        <input type="radio" ref={inputRef} key={name} name={name} value={text} className={`radio${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
                         <span className="label-text pl-2">{text}</span> 
                      </label>
             )

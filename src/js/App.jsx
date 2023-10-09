@@ -21,24 +21,24 @@ export default function App() {
       <div className="space-y-2">
         <FormItemSet classes="join flex justify-center items-center" items={[
           <User className="ml-3" />,
-          <FormItem formMethods={register} name="name" autocomplete="name" type="text" text="Név" />
+          <FormItem name="name" autocomplete="name" type="text" text="Név" />
         ]} />
 
         <FormItemSet classes="join flex justify-center items-center" items={[
           <Briefcase className="ml-3" />,
-          <FormItem formMethods={register} name="profession" autocomplete="organization-title" type="text" text="Foglalkozás" required="true" />
+          <FormItem name="profession" autocomplete="organization-title" type="text" text="Foglalkozás" required="true" />
         ]} />
 
 
         <FormItemSet classes="join flex justify-center items-center" items={[
           <Mail className="ml-3" />,
-          <FormItem formMethods={register} name="email" autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" required="true" />
+          <FormItem name="email" autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" required="true" />
         ]} />
 
         <FormItemSet classes="join flex justify-center items-center" items={[
           <KeyRound className="ml-3 w-12" />,
-          <FormItem formMethods={register} name="password" autocomplete="new-password" id="password" type="password" text="Jelszó" required="true" />,
-          <FormItem formMethods={register} type="button" onclick={() => {
+          <FormItem name="password" autocomplete="new-password" id="password" type="password" text="Jelszó" required="true" />,
+          <FormItem type="button" onclick={() => {
             document.getElementById("password").value = generateRandomPassword(16);
           }} classes="btn-ghost no-animation" text="Generálás" />
         ]} />
@@ -46,36 +46,36 @@ export default function App() {
 
       <FormItemSet title="Életkor" items={[
         <div className="join gap-2">
-          <FormItem formMethods={register} name="agegroup" type="radio" text="18-20" />
-          <FormItem formMethods={register} name="agegroup" type="radio" text="25-30" />
-          <FormItem formMethods={register} name="agegroup" type="radio" text="21-24" />
-          <FormItem formMethods={register} name="agegroup" type="radio" text="30+" />
+          <FormItem name="agegroup" type="radio" text="18-20" />
+          <FormItem name="agegroup" type="radio" text="25-30" />
+          <FormItem name="agegroup" type="radio" text="21-24" />
+          <FormItem name="agegroup" type="radio" text="30+" />
         </div>
       ]} />,
 
       <FormItemSet title="Nem" items={[
         <div className="join gap-10 flex justify-center items-center">
-          <FormItem formMethods={register} name="gender" type="radio" text="Férfi" required="true" />
-          <FormItem formMethods={register} name="gender" type="radio" text="Nő" required="true" />
+          <FormItem name="gender" type="radio" text="Férfi" required="true" />
+          <FormItem name="gender" type="radio" text="Nő" required="true" />
         </div>
       ]} />,
 
       <FormItemSet title="Ágazat" items={[
         <div className="grid grid-cols-2 gap-x-12">
-          <FormItem formMethods={register} name="field" type="radio" text="Bányászat" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Egészségügy" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Építőipar" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Élelmiszeripar" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Épületgépészet" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Honvédelem" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Gépészet" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Kereskedelem" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Oktatás" required="true" />
-          <FormItem formMethods={register} name="field" type="radio" text="Szociális" required="true" />
+          <FormItem name="field" type="radio" text="Bányászat" required="true" />
+          <FormItem name="field" type="radio" text="Egészségügy" required="true" />
+          <FormItem name="field" type="radio" text="Építőipar" required="true" />
+          <FormItem name="field" type="radio" text="Élelmiszeripar" required="true" />
+          <FormItem name="field" type="radio" text="Épületgépészet" required="true" />
+          <FormItem name="field" type="radio" text="Honvédelem" required="true" />
+          <FormItem name="field" type="radio" text="Gépészet" required="true" />
+          <FormItem name="field" type="radio" text="Kereskedelem" required="true" />
+          <FormItem name="field" type="radio" text="Oktatás" required="true" />
+          <FormItem name="field" type="radio" text="Szociális" required="true" />
         </div>
       ]} />,
 
-      <FormItem formMethods={register} type="submit" classes="mt-2" text="Regisztráció" />,
+      <FormItem type="submit" classes="mt-2" text="Regisztráció" />,
     ]} />
   ]
 }

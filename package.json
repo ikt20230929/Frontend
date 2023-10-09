@@ -7,7 +7,7 @@
     "build:esbuild": "esbuild src/js/index.js --bundle --minify --loader:.js=jsx --format=cjs --outfile=public/dist/bundle.js",
     "build:css": "npx tailwindcss -i ./src/css/style.css -o ./public/dist/bundle.css --minify",
     "build:docs": "cd docs && npm run build -- --out-dir=../public/docs",
-    "watch:esbuild": "esbuild src/js/index.js --bundle --loader:.js=jsx --format=cjs --outfile=public/dist/bundle.js --watch",
+    "watch:esbuild": "esbuild src/js/index.js --bundle --minify --loader:.js=jsx --format=cjs --outfile=public/dist/bundle.js --watch",
     "watch:css": "npx tailwindcss -i ./src/css/style.css -o ./public/dist/bundle.css --minify --watch",
     "build": "concurrently --kill-others-on-fail npm:build:esbuild npm:build:css npm:build:docs",
     "watch": "concurrently --kill-others-on-fail npm:watch:esbuild npm:watch:css"
