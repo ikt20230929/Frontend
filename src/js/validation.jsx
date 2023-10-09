@@ -1,4 +1,4 @@
-import { render } from "preact";
+import { render } from "react";
 import { Dialog } from "./components/Dialog";
 
 function isNullOrWhitespace( input ) {
