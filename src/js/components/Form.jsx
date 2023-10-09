@@ -10,22 +10,20 @@ export function FormItemSet({classes, title, items}) {
     );
 }
 
-export function FormItem({type, id, name, text, classes, autocomplete, formMethods, onclick}) {
-    const inputRef = useRef(null);
-
+export function FormItem({type, id, text, classes, autocomplete, field, onclick}) {
     switch(type) {
         case "text":
         case "password":
         case "email": {
             return (
-                <input type={type} ref={inputRef} key={name} id={id} name={name} placeholder={text} className={`input input-bordered w-full max-w-xs border-none focus:outline-none${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete}  {...formMethods} />
+                <input type={type} id={id} {...field} placeholder={text} className={`input input-bordered w-full max-w-xs border-none focus:outline-none${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
             )
         }
 
         case "checkbox": {
             return (
                 <label className="label justify-normal cursor-pointer">
-                    <input type="checkbox" ref={inputRef} key={name} name={name} className={`checkbox${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
+                    <input type="checkbox" {...field} className={`checkbox${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
                     <span className="label-text pl-2">{text}</span> 
                 </label>
             )
@@ -34,7 +32,7 @@ export function FormItem({type, id, name, text, classes, autocomplete, formMetho
         case "radio": {
             return (
                     <label className="label justify-normal cursor-pointer">
-                        <input type="radio" ref={inputRef} key={name} name={name} value={text} className={`radio${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
+                        <input type="radio" {...field} value={text} className={`radio${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
                         <span className="label-text pl-2">{text}</span> 
                      </label>
             )
@@ -43,7 +41,7 @@ export function FormItem({type, id, name, text, classes, autocomplete, formMetho
         case "submit":
         case "button": {
             return (
-                <button type={type} ref={inputRef} onClick={onclick} className={`btn${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete}>{text}</button>
+                <button type={type} onClick={onclick} className={`btn${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete}>{text}</button>
             )
         }
     }
