@@ -52,7 +52,7 @@ export default function App() {
         ]} />
       </div>,
 
-      <FormItemSet title="Életkor" items={[
+      <FormItemSet title="Életkor" classes="focus-within:outline-none" items={[
         <div className="join gap-2">
           <Controller rules={{ required: true }} name="agegroup" control={control} render={({ field }) => (
             <FormItem field={field} type="radio" text="18-20" />
@@ -69,7 +69,7 @@ export default function App() {
         </div>
       ]} />,
 
-      <FormItemSet title="Nem" items={[
+      <FormItemSet title="Nem" classes="focus-within:outline-none" items={[
         <div className="join gap-10 flex justify-center items-center">
           <Controller rules={{ required: true }} name="gender" control={control} render={({ field }) => (
             <FormItem field={field} type="radio" text="Férfi" />
@@ -80,7 +80,7 @@ export default function App() {
         </div>
       ]} />,
 
-      <FormItemSet title="Ágazat" items={[
+      <FormItemSet title="Ágazat" classes="focus-within:outline-none" items={[
         <div className="grid grid-cols-2 gap-x-12">
           <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
             <FormItem field={field} type="radio" text="Bányászat" />

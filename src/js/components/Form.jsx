@@ -1,5 +1,4 @@
 import React from "react";
-import { useRef } from "react";
 
 export function FormItemSet({classes, title, items}) {
     return (
@@ -16,7 +15,7 @@ export function FormItem({type, id, text, classes, autocomplete, field, onclick}
         case "password":
         case "email": {
             return (
-                <input type={type} id={id} {...field} placeholder={text} className={`input input-bordered w-full max-w-xs border-none focus:outline-none${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
+                <input type={type} id={id} {...field} placeholder={text} className={`input w-full max-w-xs focus:outline-none${classes ? ` ${classes}` : ""}`} autoComplete={autocomplete} />
             )
         }
 
