@@ -8,6 +8,6 @@ module.exports = {
   darkMode: 'class',
   daisyui: {
     darkTheme: false,
-    themes: false,
+    themes: false
   }
 }

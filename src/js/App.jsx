@@ -19,14 +19,14 @@ export default function App() {
 
     <Form classes="container mx-auto" onsubmit={handleSubmit(onSubmit)} items={[
       <div className="space-y-2">
-        <FormItemSet classes="join flex justify-center items-center" items={[
+        <FormItemSet joined={true} error={errors.name && true} items={[
           <Controller rules={{ required: true }} name="name" control={control} render={({ field }) => [
             <User className="ml-3" />,
             <FormItem field={field} type="text" text="Név" />
           ]} />
         ]} />
 
-        <FormItemSet classes="join flex justify-center items-center" items={[
+        <FormItemSet joined={true} error={errors.profession && true} items={[
           <Controller rules={{ required: true }} name="profession" control={control} render={({ field }) => [
             <Briefcase className="ml-3" />,
             <FormItem field={field} type="text" text="Foglalkozás" />
@@ -34,14 +34,14 @@ export default function App() {
         ]} />
 
 
-        <FormItemSet classes="join flex justify-center items-center" items={[
+        <FormItemSet joined={true} error={errors.email && true} items={[
           <Controller rules={{ required: true }} name="email" control={control} render={({ field }) => [
             <Mail className="ml-3" />,
             <FormItem field={field} type="email" text="Email (.com/.hu/.net/.edu)" />
           ]} />
         ]} />
 
-        <FormItemSet classes="join flex justify-center items-center" items={[
+        <FormItemSet joined={true} error={errors.password && true} items={[
           <Controller rules={{ required: true }} name="password" control={control} render={({ field }) => [
             <KeyRound className="ml-3 w-12" />,
             <FormItem field={field} autocomplete="new-password" id="password" type="password" text="Jelszó" />
@@ -52,7 +52,7 @@ export default function App() {
         ]} />
       </div>,
 
-      <FormItemSet title="Életkor" classes="focus-within:outline-none" items={[
+      <FormItemSet title="Életkor" error={errors.agegroup && true} nofocus={true} items={[
         <div className="join gap-2">
           <Controller rules={{ required: true }} name="agegroup" control={control} render={({ field }) => (
             <FormItem field={field} type="radio" text="18-20" />
@@ -69,7 +69,7 @@ export default function App() {
         </div>
       ]} />,
 
-      <FormItemSet title="Nem" classes="focus-within:outline-none" items={[
+      <FormItemSet title="Nem" error={errors.gender && true} nofocus={true} items={[
         <div className="join gap-10 flex justify-center items-center">
           <Controller rules={{ required: true }} name="gender" control={control} render={({ field }) => (
             <FormItem field={field} type="radio" text="Férfi" />
@@ -80,7 +80,7 @@ export default function App() {
         </div>
       ]} />,
 
-      <FormItemSet title="Ágazat" classes="focus-within:outline-none" items={[
+      <FormItemSet title="Ágazat" error={errors.field && true} nofocus={true} items={[
         <div className="grid grid-cols-2 gap-x-12">
           <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
             <FormItem field={field} type="radio" text="Bányászat" />

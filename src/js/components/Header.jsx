@@ -8,13 +8,11 @@ export function HeaderItem(props) {
 
 export function Header(props) {
     return (
-        <div className="navbar bg-base-100">
             <div className="navbar">
                 <a className="btn btn-ghost pointer-events-none normal-case text-xl">{props.title}</a>
                 <ul className="menu menu-horizontal px-1 ml-auto">
                     {...props.items}
                 </ul>
             </div>
-        </div>  
     );
 }

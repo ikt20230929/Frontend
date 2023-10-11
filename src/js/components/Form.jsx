@@ -1,8 +1,34 @@
 import React from "react";
+import { tv } from 'tailwind-variants';
 
-export function FormItemSet({classes, title, items}) {
+const fieldset = tv({
+    base: `rounded-lg`,
+    variants: {
+        nofocus: {
+            true: 'focus-within:outline-none',
+            false: 'focus-within:outline-[hsl(var(--bc)/.2)]'
+        },
+
+        error: {
+            true: 'border-red-500 focus-within:outline-red-500'
+        },
+
+        joined: {
+            true: 'join flex justify-center items-center'
+        },
+
+    },
+
+    defaultVariants: {
+        error: false,
+        joined: false,
+        nofocus: false
+    }
+});
+
+export function FormItemSet({error, joined, nofocus, title, items}) {
     return (
-        <fieldset className={`border dark:border-[#383f47] light:border-[#d2d4d7] rounded-lg${classes ? ` ${classes}` : ""}`}>
+        <fieldset className={fieldset({ error: error, joined: joined, nofocus: nofocus })}>
             {title ? <legend className="text-center m-auto">{title}</legend> : null}
             {...items}
         </fieldset>
