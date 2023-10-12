@@ -1,9 +1,9 @@
-export function Dialog(props) {
+export function Dialog({id, title, text}) {
     return (
-        <dialog id={props.id} className="modal">
+        <dialog id={id} className="modal">
             <div className="modal-box">
-                <h3 className="font-bold text-lg">{props.title}</h3>
-                <pre className="py-4">{props.text}</pre>
+                <h3 className="font-bold text-lg">{title}</h3>
+                <pre className="py-4">{text}</pre>
             </div>
             <form method="dialog" className="modal-backdrop">
                 <button>Bezárás</button>

@@ -7,7 +7,7 @@ import { generateRandomPassword } from "./passwordGenerator";
 import { Controller, useForm } from "react-hook-form";
 
 export default function App() {
-  const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, trigger, formState: { errors } } = useForm({
     mode: "onChange"
   });
 
@@ -52,6 +52,7 @@ export default function App() {
           ]} />,
           <FormItem type="button" onclick={() => {
             setValue("password", generateRandomPassword(16));
+            trigger("password");
           }} classes="btn-ghost no-animation" text="Generálás" />
         ]} />
       </div>,

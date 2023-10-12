@@ -1,17 +1,17 @@
 import React from "react";
 
-export function HeaderItem(props) {
+export function HeaderItem({href, text}) {
     return (
-        <li><a className={props.class} href={props.href}>{props.text}</a></li>
+        <li><a href={href}>{text}</a></li>
     )
 }
 
-export function Header(props) {
+export function Header({title, items}) {
     return (
             <div className="navbar">
-                <a className="btn btn-ghost pointer-events-none normal-case text-xl">{props.title}</a>
+                <a className="btn btn-ghost pointer-events-none normal-case text-xl">{title}</a>
                 <ul className="menu menu-horizontal px-1 ml-auto">
-                    {...props.items}
+                    {...items}
                 </ul>
             </div>
     );
