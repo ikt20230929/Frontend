@@ -10,14 +10,21 @@ const fieldset = tv({
         },
 
         error: {
-            true: 'border-red-500 focus-within:outline-red-500'
+            true: 'border-red-500'
         },
 
         joined: {
             true: 'join flex justify-center items-center'
         },
-
     },
+
+    compoundVariants: [
+        {
+            error: true,
+            nofocus: false,
+            class: "focus-within:outline-red-500"
+        }
+    ],
 
     defaultVariants: {
         error: false,

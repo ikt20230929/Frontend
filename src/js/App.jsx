@@ -7,9 +7,13 @@ import { generateRandomPassword } from "./passwordGenerator";
 import { Controller, useForm } from "react-hook-form";
 
 export default function App() {
-  const { control, handleSubmit, setValue, formState: { errors } } = useForm();
+  const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+    mode: "onChange"
+  });
+
   const onSubmit = (data) => {
     console.log(data);
+    console.log(errors);
   };
 
   return [
@@ -20,24 +24,24 @@ export default function App() {
     <Form classes="container mx-auto" onsubmit={handleSubmit(onSubmit)} items={[
       <div className="space-y-2">
         <FormItemSet joined={true} error={errors.name && true} items={[
-          <Controller rules={{ required: true }} name="name" control={control} render={({ field }) => [
+          <Controller rules={{required: true, pattern: /^[A-Z][^0-9]*$/}} name="name" control={control} render={({ field }) => [
             <User className="ml-3" />,
-            <FormItem field={field} type="text" text="Név" />
+            <FormItem field={field} autocomplete="name" type="text" text="Név" />
           ]} />
         ]} />
 
         <FormItemSet joined={true} error={errors.profession && true} items={[
           <Controller rules={{ required: true }} name="profession" control={control} render={({ field }) => [
             <Briefcase className="ml-3" />,
-            <FormItem field={field} type="text" text="Foglalkozás" />
+            <FormItem field={field} autocomplete="organization-title" type="text" text="Foglalkozás" />
           ]} />
         ]} />
 
 
         <FormItemSet joined={true} error={errors.email && true} items={[
-          <Controller rules={{ required: true }} name="email" control={control} render={({ field }) => [
+          <Controller rules={{required: true, pattern: /.*(\.com|\.hu|\.net|\.edu)/}} name="email" control={control} render={({ field }) => [
             <Mail className="ml-3" />,
-            <FormItem field={field} type="email" text="Email (.com/.hu/.net/.edu)" />
+            <FormItem field={field} autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" />
           ]} />
         ]} />
 
@@ -115,7 +119,7 @@ export default function App() {
         </div>
       ]} />,
 
-      <FormItem type="submit" onclick={() => console.log(errors)} classes="mt-2" text="Regisztráció" />,
+      <FormItem type="submit" classes="mt-2" text="Regisztráció" />,
     ]} />
   ]
 }
