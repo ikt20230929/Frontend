@@ -1,3 +1,5 @@
+import React from "react"
+
 export function Dialog({id, title, text}) {
     return (
         <dialog id={id} className="modal">

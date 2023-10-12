@@ -11,7 +11,7 @@ A regisztrációs űrlap kitöltése során kérjük, figyelmesen töltse ki az 
 ### További információk:
 
 - **Életkor**: Jelölje be a megfelelő korcsoportot.
-- **Nem**: Válassza ki a nemét (Férfi/Nő).
+- **Nem:** Válassza ki a nemét (Férfi/Nő/Egyéb). Ha a 'Egyéb' opciót választja, megjelenik egy szövegmező, amelybe bármilyen értéket megadhat.
 - **Ágazat**: Válassza ki a tevékenységi területét a rendelkezésre álló lehetőségek közül.
 
 ## Regisztráció beküldése

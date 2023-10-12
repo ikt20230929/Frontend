@@ -1,19 +1,42 @@
-import { Briefcase, KeyRound, Mail, User } from "lucide-react";
-import React from "react";
+import { Briefcase, HelpCircle, KeyRound, Mail, User } from "lucide-react";
+import React, { Fragment, useState } from "react";
 import { createRoot } from 'react-dom/client';
-import { Form, FormItem, FormItemSet } from "./components/Form";
+import { Controller, useForm, useWatch } from "react-hook-form";
+import { Dialog } from "./components/Dialog";
+import { Form, FormItem, FormItemSet, RadioButtonGroup } from "./components/Form";
 import { Header, HeaderItem } from "./components/Header";
 import { generateRandomPassword } from "./passwordGenerator";
-import { Controller, useForm } from "react-hook-form";
 
 export default function App() {
-  const { control, handleSubmit, setValue, trigger, formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, trigger, reset, formState: { errors } } = useForm({
     mode: "onChange"
   });
 
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogText, setDialogText] = useState("");
+
+  const gender = useWatch({
+    control,
+    name: "gender"
+  });
+
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(errors);
+    if (data.gender_custom) {
+      data.gender = data.gender_custom;
+    }
+
+    setDialogTitle("Sikeres regisztráció!");
+    setDialogText(`Név: ${data.name}
+Foglalkozás: ${data.profession}
+Email: ${data.email}
+Jelszó: ${data.password}
+Életkor: ${data.agegroup}
+Nem: ${data.gender}
+Ágazat: ${data.field}`);
+    document.getElementById('status').showModal();
+    
+    reset();
+    document.getElementById('register').reset();
   };
 
   return [
@@ -21,37 +44,62 @@ export default function App() {
       <HeaderItem href="docs" text="Dokumentáció" />
     ]} />,
 
-    <Form classes="container mx-auto" onsubmit={handleSubmit(onSubmit)} items={[
+    <Dialog id="status" title={dialogTitle} text={dialogText} />,
+
+    <Form classes="container mx-auto" id="register" onsubmit={handleSubmit(onSubmit)} items={[
       <div className="space-y-2">
-        <FormItemSet joined={true} error={errors.name && true} items={[
-          <Controller rules={{required: {
-            value: true,
-            message: "A név mező nem lehet üres!"
-          }, pattern: /^[A-Z][^0-9]*$/}} name="name" control={control} render={({ field }) => [
+        <FormItemSet joined={true} error={errors.name} items={[
+          <Controller rules={{
+            required: {
+              value: true,
+              message: "A név mező nem lehet üres!"
+            },
+            pattern: {
+              value: /^[A-Z][^0-9]*$/,
+              message: "A megadott név nem felel meg a követelményeknek!"
+            }
+          }} name="name" control={control} defaultValue="" render={({ field }) => [
             <User className="ml-3" />,
             <FormItem field={field} autocomplete="name" type="text" text="Név" />
           ]} />
         ]} />
-        {errors.name && <span className="text-red-500">{errors.name.message}</span>}
 
-        <FormItemSet joined={true} error={errors.profession && true} items={[
-          <Controller rules={{ required: true }} name="profession" control={control} render={({ field }) => [
+        <FormItemSet joined={true} error={errors.profession} items={[
+          <Controller rules={{
+            required: {
+              value: true,
+              message: "A foglalkozás mező nem lehet üres!"
+            }
+          }} name="profession" control={control} defaultValue="" render={({ field }) => [
             <Briefcase className="ml-3" />,
             <FormItem field={field} autocomplete="organization-title" type="text" text="Foglalkozás" />
           ]} />
         ]} />
 
-
-        <FormItemSet joined={true} error={errors.email && true} items={[
-          <Controller rules={{required: true, pattern: /.*(\.com|\.hu|\.net|\.edu)/}} name="email" control={control} render={({ field }) => [
+        <FormItemSet joined={true} error={errors.email} items={[
+          <Controller rules={{
+            required: {
+              value: true,
+              message: "Az email mező nem lehet üres!"
+            },
+            pattern: {
+              value: /.*(\.com|\.hu|\.net|\.edu)/,
+              message: "Az email cím nem felel meg a követelményeknek!"
+            }
+          }} name="email" control={control} defaultValue="" render={({ field }) => [
             <Mail className="ml-3" />,
             <FormItem field={field} autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" />
           ]} />
         ]} />
 
-        <FormItemSet joined={true} error={errors.password && true} items={[
-          <Controller rules={{ required: true }} name="password" control={control} render={({ field }) => [
-            <KeyRound className="ml-3 w-12" />,
+        <FormItemSet joined={true} error={errors.password} items={[
+          <Controller rules={{
+            required: {
+              value: true,
+              message: "A jelsző mező nem lehet üres!"
+            }
+          }} name="password" control={control} defaultValue="" render={({ field }) => [
+            <KeyRound className="ml-3 w-[2.79rem]" />,
             <FormItem field={field} autocomplete="new-password" id="password" type="password" text="Jelszó" />
           ]} />,
           <FormItem type="button" onclick={() => {
@@ -61,71 +109,73 @@ export default function App() {
         ]} />
       </div>,
 
-      <FormItemSet title="Életkor" error={errors.agegroup && true} nofocus={true} items={[
-        <div className="join gap-2">
-          <Controller rules={{ required: true }} name="agegroup" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="18-20" />
-          )} />
-          <Controller rules={{ required: true }} name="agegroup" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="25-30" />
-          )} />
-          <Controller rules={{ required: true }} name="agegroup" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="21-24" />
-          )} />
-          <Controller rules={{ required: true }} name="agegroup" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="30+" />
-          )} />
-        </div>
+      <FormItemSet title="Életkor" error={errors.agegroup} nofocus={true} items={[
+        <RadioButtonGroup name="agegroup" options={[
+          { value: '18-20', label: '18-20' },
+          { value: '25-30', label: '25-30' },
+          { value: '21-24', label: '21-24' },
+          { value: '30+', label: '30+' },
+        ]} control={control} rules={{
+          required: {
+            value: true,
+            message: "Ki kell választania a korcsoportját!"
+          }
+        }} />
       ]} />,
 
-      <FormItemSet title="Nem" error={errors.gender && true} nofocus={true} items={[
-        <div className="join gap-10 flex justify-center items-center">
-          <Controller rules={{ required: true }} name="gender" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Férfi" />
-          )} />
-          <Controller rules={{ required: true }} name="gender" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Nő" />
-          )} />
-        </div>
+      <Fragment>
+        <FormItemSet title="Nem" error={errors.gender} nofocus={true} items={[
+          <div className="join gap-10 flex justify-center">
+            <RadioButtonGroup name="gender" options={[
+              { value: 'male', label: 'Férfi' },
+              { value: 'female', label: 'Nő' },
+              { value: 'other', label: 'Egyéb' }
+            ]} control={control} rules={{
+              required: {
+                value: true,
+                message: "Ki kell választania a nemét!"
+              }
+            }} />
+          </div>
+        ]} />
+        {gender == "Egyéb" && [
+          <div className="mt-2">
+            <FormItemSet joined={true} error={errors.gender_custom} nofocus={true} items={[
+              <Controller rules={{
+                required: {
+                  value: true,
+                  message: "Az egyéb mező nem lehet üres!"
+                }
+              }} name="gender_custom" control={control} defaultValue="" render={({ field }) => [
+                <HelpCircle className="ml-3" />,
+                <FormItem field={field} type="text" text="Adja meg a nemét!" />
+              ]} />
+            ]} />
+          </div>
+        ]}
+      </Fragment>,
+
+      <FormItemSet title="Ágazat" error={errors.field} nofocus={true} items={[
+        <RadioButtonGroup name="field" grid={true} options={[
+          { value: 'mining', label: 'Bányászat' },
+          { value: 'healthcare', label: 'Egészségügy' },
+          { value: 'construction', label: 'Építőipar' },
+          { value: 'food_industry', label: 'Élelmiszeripar' },
+          { value: 'civil_engineering', label: 'Épületgépészet' },
+          { value: 'defense', label: 'Honvédelem' },
+          { value: 'mechanical_engineering', label: 'Gépészet' },
+          { value: 'commerce', label: 'Kereskedelem' },
+          { value: 'education', label: 'Oktatás' },
+          { value: 'social', label: 'Szociális' }
+        ]} control={control} rules={{
+          required: {
+            value: true,
+            message: "Az ágazat mező nem lehet üres!"
+          }
+        }} />
       ]} />,
 
-      <FormItemSet title="Ágazat" error={errors.field && true} nofocus={true} items={[
-        <div className="grid grid-cols-2 gap-x-12">
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Bányászat" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Egészségügy" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Építőipar" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Élelmiszeripar" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Épületgépészet" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Honvédelem" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Gépészet" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Kereskedelem" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Oktatás" />
-          )} />
-          <Controller rules={{ required: true }} name="field" control={control} render={({ field }) => (
-            <FormItem field={field} type="radio" text="Szociális" />
-          )} />
-        </div>
-      ]} />,
-
-      <FormItem type="submit" classes="mt-2" text="Regisztráció" />,
-      <FormItem type="button" onclick={() => console.log(errors)} classes="mt-2" text="print errors (debug)" />,
+      <FormItem type="submit" classes="mt-2" text="Regisztráció" />
     ]} />
   ]
 }

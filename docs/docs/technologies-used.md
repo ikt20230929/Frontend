@@ -12,6 +12,7 @@ Ebben a dokumentumban összefoglaljuk, hogy milyen technológiákat és könyvt�
 - **daisyui (v3.8.2)**: A DaisyUI egy Tailwind CSS plugin, amely számos előre elkészített UI komponenst tartalmaz. Ezt az eszközt használtuk a projekt UI elemek fejlesztéséhez és testreszabásához.
 - **lucide-react (v0.284.0)**: A Lucide egy ikonkészlet, amely egyszerű és tiszta ikonokat tartalmaz. A React alkalmazáshoz ezt az ikonkészletet használtuk az esztétikus felhasználói felület kialakításához.
 - **tailwind-variants (v0.1.14)**: A Tailwind Variants egy CSS variánskezelő API könyvtár a TailwindCSS-hez.
+- **tailwind-merge (v1.14.0)**: A Tailwind Merge egy Tailwind CSS plugin, amely lehetővé teszi a CSS osztályok dinamikus összefésülését (merge) egyetlen osztállyá. Ezt az eszközt használtuk a dinamikusan változó stílusok kezeléséhez és alkalmazásához a projektben.
 
 ## UI Komponensek
 
