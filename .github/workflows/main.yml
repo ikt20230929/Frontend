@@ -13,9 +13,6 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - run: |
-          touch .env
-          echo DOCS_BASE_URL=/Frontend/docs/ >> .env
       - uses: actions/checkout@v4
       - run: |
           cd docs
