@@ -62,8 +62,8 @@ export function RadioButtonGroup({ name, rules, options, control, error, grid })
     return (
         <div className={radioBtnGroup({ grid: grid })}>
         {options.map(option => (
-            <Controller key={option.value} rules={rules} name={name} control={control} render={({ field }) => (
-                <FormItem field={field} type="radio" text={option.label} />
+            <Controller rules={rules} name={name} control={control} render={({ field }) => (
+                <FormItem field={field} type="radio" text={option} />
             )} />
         ))}
         <ErrorField error={error} />
