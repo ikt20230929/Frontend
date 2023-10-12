@@ -24,11 +24,15 @@ export default function App() {
     <Form classes="container mx-auto" onsubmit={handleSubmit(onSubmit)} items={[
       <div className="space-y-2">
         <FormItemSet joined={true} error={errors.name && true} items={[
-          <Controller rules={{required: true, pattern: /^[A-Z][^0-9]*$/}} name="name" control={control} render={({ field }) => [
+          <Controller rules={{required: {
+            value: true,
+            message: "A név mező nem lehet üres!"
+          }, pattern: /^[A-Z][^0-9]*$/}} name="name" control={control} render={({ field }) => [
             <User className="ml-3" />,
             <FormItem field={field} autocomplete="name" type="text" text="Név" />
           ]} />
         ]} />
+        {errors.name && <span className="text-red-500">{errors.name.message}</span>}
 
         <FormItemSet joined={true} error={errors.profession && true} items={[
           <Controller rules={{ required: true }} name="profession" control={control} render={({ field }) => [
@@ -121,6 +125,7 @@ export default function App() {
       ]} />,
 
       <FormItem type="submit" classes="mt-2" text="Regisztráció" />,
+      <FormItem type="button" onclick={() => console.log(errors)} classes="mt-2" text="print errors (debug)" />,
     ]} />
   ]
 }
