@@ -17,6 +17,10 @@ jobs:
           touch .env
           echo DOCS_BASE_URL=/Frontend/docs/ >> .env
       - uses: actions/checkout@v4
+      - run: |
+          cd docs
+          touch .env
+          echo DOCS_BASE_URL=/Frontend/docs/ >> .env
       - uses: actions/setup-node@v3.8.1
       - run: |
           npm install
