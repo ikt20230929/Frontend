@@ -8,9 +8,28 @@ import { Header, HeaderItem } from "./components/Header";
 import { generateRandomPassword } from "./passwordGenerator";
 
 export default function App() {
+  const defaults = {
+    name: "",
+    profession: "",
+    email: "",
+    password: "",
+    gender_custom: "",
+    agegroup: null,
+    gender: null,
+    field: null
+  };
+
   const { control, handleSubmit, setValue, trigger, reset, formState: { errors } } = useForm({
-    mode: "onChange"
+    mode: "onChange",
+    defaultValues: defaults
   });
+
+  const resetForm = () => {
+    reset(defaults);
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.checked = false;
+    });
+  }
 
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogText, setDialogText] = useState("");
@@ -34,9 +53,8 @@ Jelszó: ${data.password}
 Nem: ${data.gender}
 Ágazat: ${data.field}`);
     document.getElementById('status').showModal();
-    
-    reset();
-    document.getElementById('register').reset();
+
+    resetForm();
   };
 
   return [
@@ -54,11 +72,11 @@ Nem: ${data.gender}
               value: true,
               message: "A név mező nem lehet üres!"
             },
-            pattern: {
-              value: /^[A-Z][^0-9]*$/,
-              message: "A megadott név nem felel meg a követelményeknek!"
+            validate: {
+              firstLetter: (value) => /^[A-Z]/.test(value) || "A névnek nagybetűvel kell kezdődnie!",
+              noNumbers: (value) => /^[^0-9]*$/.test(value) || "A név nem tartalmazhat számokat!"
             }
-          }} name="name" control={control} defaultValue="" render={({ field }) => [
+          }} name="name" control={control} render={({ field }) => [
             <User className="ml-3" />,
             <FormItem field={field} autocomplete="name" type="text" text="Név" />
           ]} />
@@ -70,7 +88,7 @@ Nem: ${data.gender}
               value: true,
               message: "A foglalkozás mező nem lehet üres!"
             }
-          }} name="profession" control={control} defaultValue="" render={({ field }) => [
+          }} name="profession" control={control} render={({ field }) => [
             <Briefcase className="ml-3" />,
             <FormItem field={field} autocomplete="organization-title" type="text" text="Foglalkozás" />
           ]} />
@@ -82,11 +100,11 @@ Nem: ${data.gender}
               value: true,
               message: "Az email mező nem lehet üres!"
             },
-            pattern: {
-              value: /.*@.*(\.com|\.hu|\.net|\.edu)/,
-              message: "Az email cím nem felel meg a követelményeknek!"
+            validate: {
+              atSign: (value) => /@/.test(value) || "Az email címnek tartalmaznia kell egy @ jelet!",
+              tld: (value) => /(\.com|\.hu|\.net|\.edu)$/.test(value) || "Az email címnek .com, .hu, .net vagy .edu végződésűnek kell lennie!"
             }
-          }} name="email" control={control} defaultValue="" render={({ field }) => [
+          }} name="email" control={control} render={({ field }) => [
             <Mail className="ml-3" />,
             <FormItem field={field} autocomplete="email" type="email" text="Email (.com/.hu/.net/.edu)" />
           ]} />
@@ -98,7 +116,7 @@ Nem: ${data.gender}
               value: true,
               message: "A jelsző mező nem lehet üres!"
             }
-          }} name="password" control={control} defaultValue="" render={({ field }) => [
+          }} name="password" control={control} render={({ field }) => [
             <KeyRound className="ml-3 w-[2.79rem]" />,
             <FormItem field={field} autocomplete="new-password" id="password" type="password" text="Jelszó" />
           ]} />,
@@ -146,7 +164,7 @@ Nem: ${data.gender}
                   value: true,
                   message: "Az egyéb mező nem lehet üres!"
                 }
-              }} name="gender_custom" control={control} defaultValue="" render={({ field }) => [
+              }} name="gender_custom" control={control} render={({ field }) => [
                 <HelpCircle className="ml-3" />,
                 <FormItem field={field} type="text" text="Adja meg a nemét!" />
               ]} />
