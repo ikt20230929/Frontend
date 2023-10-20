@@ -102,7 +102,7 @@ export function FormItem({type, id, text, classes, autocomplete, field, onclick}
         case "submit":
         case "button": {
             return (
-                <button type={type} onClick={onclick} className={twMerge("btn", classes)} autoComplete={autocomplete}>{text}</button>
+                <button type={type} onClick={onclick} className={twMerge(classes)} autoComplete={autocomplete}>{text}</button>
             )
         }
     }

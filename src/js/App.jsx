@@ -1,4 +1,4 @@
-import { Briefcase, HelpCircle, KeyRound, Mail, User } from "lucide-react";
+import { Briefcase, Eye, EyeOff, HelpCircle, KeyRound, Mail, User } from "lucide-react";
 import React, { Fragment, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import { Controller, useForm, useWatch } from "react-hook-form";
@@ -33,6 +33,7 @@ export default function App() {
 
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogText, setDialogText] = useState("");
+  const [hidePass, setHidePass] = useState(true);
 
   const gender = useWatch({
     control,
@@ -117,13 +118,16 @@ Nem: ${data.gender}
               message: "A jelsző mező nem lehet üres!"
             }
           }} name="password" control={control} render={({ field }) => [
-            <KeyRound className="ml-3 w-[2.79rem]" />,
-            <FormItem field={field} autocomplete="new-password" id="password" type="password" text="Jelszó" />
+            <KeyRound className="ml-3 w-[4.387rem]" />,
+            <FormItem field={field} classes="m-[1px]" autocomplete="new-password" id="password" type={hidePass ? "password" : "text"} text="Jelszó" />
           ]} />,
+          <FormItem type="button" onclick={() => {
+            setHidePass(!hidePass);
+          }} classes="btn-ghost" text={hidePass ? <Eye/> : <EyeOff/>} />,
           <FormItem type="button" onclick={() => {
             setValue("password", generateRandomPassword(16));
             trigger("password");
-          }} classes="btn-ghost no-animation" text="Generálás" />
+          }} classes="btn btn-ghost no-animation" text="Generálás" />
         ]} />
       </div>,
 
@@ -193,7 +197,7 @@ Nem: ${data.gender}
         }} />
       ]} />,
 
-      <FormItem type="submit" classes="mt-2" text="Regisztráció" />
+      <FormItem type="submit" classes="btn mt-2" text="Regisztráció" />
     ]} />
   ]
 }
