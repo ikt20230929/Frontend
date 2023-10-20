@@ -119,7 +119,7 @@ Nem: ${data.gender}
             }
           }} name="password" control={control} render={({ field }) => [
             <KeyRound className="ml-3 w-[4.387rem]" />,
-            <FormItem field={field} classes="m-[1px]" autocomplete="new-password" id="password" type={hidePass ? "password" : "text"} text="Jelszó" />
+            <FormItem field={field} classes="ml-[1px]" autocomplete="new-password" id="password" type={hidePass ? "password" : "text"} text="Jelszó" />
           ]} />,
           <FormItem type="button" onclick={() => {
             setHidePass(!hidePass);
